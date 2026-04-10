@@ -91,10 +91,13 @@
 const express = require("express");
 const app = express();
 const db = require("./db");
+require ('dotenv').config();
 
 //It is a middleware used in Node.js / Express.js apps.Its job is to read data sent by the client in the request body.
 const bodyparser = require("body-parser");
 app.use(bodyparser.json());
+
+const PORT = process.env.PORT || 3000;
 
 //Import the router files
 const routerPerson = require("./routes/routerPerson");
@@ -104,7 +107,8 @@ const menuRouter = require("./routes/menuRouter");
 app.use("/person", routerPerson);
 app.use("/menuItem", menuRouter);
 
-app.listen(3000, () => {
+
+app.listen(PORT, () => {
   console.log("Server is running on port 3000");
 });
 
