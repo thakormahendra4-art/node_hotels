@@ -3,6 +3,20 @@ const router = express.Router();
 
 const menuItem = require('../models/menuItem');
 
+
+router.get("/", async (req, res) => {
+  try {
+    const data = await menuItem.find();   // ✅ get all users from DB
+    console.log("Data Here");
+    res.status(200).json(data);
+    
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Failed to fetch users" });
+  }
+});
+
+
 router.post('/', async (req,res) =>{
             try{
                 const data = req.body

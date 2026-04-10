@@ -2,6 +2,18 @@ const express = require("express");
 const router = express.Router();
 const person = require("./../models/person");
 
+router.get("/", async (req, res) => {
+  try {
+    const data = await person.find();   // ✅ get all users from DB
+     console.log("Data Here");
+    res.status(200).json(data);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Failed to fetch users" });
+  }
+});
+
+
 //Post route to add a person
 router.post("/", async (req, res) => {
   try {
